@@ -24,12 +24,12 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
     sidebarLayout(
         sidebarPanel(
             fluidRow(
-                column(width = 6,
+                column(width = 5,
                        a(href = "https://oaiti.org", target = "_blank", img(src = "images/oaiti_transparent.png", width = "135"))
                 ),
-                column(width = 6,
+                column(width = 7,
                        br(),
-                       a(href = "https://forensicstats.org", target = "_blank", img(src = "images/csafe_logo.png", width = "135"))
+                       a(href = "https://forensicstats.org", target = "_blank", img(src = "images/csafe_logo.png", width = "180"))
                 )
             ),
             
@@ -60,13 +60,13 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                  
                  hr(),
                  
-                 selectInput("choose1", "Choose First Land", choices = c(bullet_choices, "Upload Image"), selected = bullet_choices[5]),
+                 selectInput("choose1", "Choose First Land", choices = c("Upload Image", bullet_choices), selected = bullet_choices[5]),
                  
                  conditionalPanel(condition = "input.choose1 == 'Upload Image'",
                     fileInput("file1", "First Bullet Land")                 
                  ),
                  
-                 selectInput("choose2", "Choose Second Land", choices = c(bullet_choices, "Upload Image"), selected = bullet_choices[7]),
+                 selectInput("choose2", "Choose Second Land", choices = c("Upload Image", bullet_choices), selected = bullet_choices[7]),
                  
                  conditionalPanel(condition = "input.choose2 == 'Upload Image'",
                     fileInput("file2", "Second Bullet Land")              
@@ -284,7 +284,9 @@ server <- shinyServer(function(input, output, session) {
     
     bullet1 <- reactive({
         withProgress(message = "Loading bullet data...", expr = {
-            if (!is.null(input$file1) && input$choose1 == "Upload Image") {
+            if (input$choose1 == "Upload Image") {
+                if (is.null(input$file1)) return(NULL)
+                
                 return(read_x3p(input$file1$datapath))    
             }
             
@@ -294,7 +296,9 @@ server <- shinyServer(function(input, output, session) {
     
     bullet2 <- reactive({
         withProgress(message = "Loading bullet data...", expr = {
-            if (!is.null(input$file2) && input$choose2 == "Upload Image") {
+            if (input$choose2 == "Upload Image") {
+                if (is.null(input$file2)) return(NULL)
+                
                 return(read_x3p(input$file2$datapath))    
             }
             
