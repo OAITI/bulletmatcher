@@ -25,11 +25,11 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
         sidebarPanel(
             fluidRow(
                 column(width = 5,
-                       a(href = "https://oaiti.org", target = "_blank", img(src = "images/oaiti_transparent.png", width = "135"))
+                       a(href = "https://oaiti.org", target = "_blank", img(src = "images/oaiti_transparent.png", width = "100%"))
                 ),
                 column(width = 7,
                        br(),
-                       a(href = "https://forensicstats.org", target = "_blank", img(src = "images/csafe_logo.png", width = "180"))
+                       a(href = "https://forensicstats.org", target = "_blank", img(src = "images/csafe_logo.png", width = "100%"))
                 )
             ),
             
