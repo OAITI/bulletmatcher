@@ -19,6 +19,8 @@ addResourcePath("images", "images")
 
 ui <- fluidPage(theme = shinytheme("cerulean"),
                 
+    includeCSS("css/styles.css"),
+                
     titlePanel("BulletMatcher Bullet Land Matching Algorithm"),
     
     sidebarLayout(
